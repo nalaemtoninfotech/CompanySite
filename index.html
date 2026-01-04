@@ -938,7 +938,7 @@ document.addEventListener("DOMContentLoaded", () => {
                                         </div>
         
                                         <div class="form-group col-md-12 mb-5">
-                                            <textarea name="message" class="form-control" id="message" rows="4" placeholder="Write Message"></textarea>
+                                            <textarea name="message" class="form-control" id="message" rows="4" placeholder="Write Message" required ></textarea>
                                             <div class="help-block with-errors"></div>
                                         </div>
         
@@ -959,30 +959,49 @@ document.addEventListener("DOMContentLoaded", () => {
     <!-- Page Contact Us End -->
 
     <script>
-        document.getElementById("contactForm").addEventListener("submit", function(e) {
-            e.preventDefault();
+        document.getElementById("contactForm").addEventListener("submit", function (e) {
+        e.preventDefault();
 
-            const data = {
-                fname: document.getElementById("fname").value,
-                lname: document.getElementById("lname").value,
-                phone: document.getElementById("phone").value,
-                email: document.getElementById("email").value,
-                message: document.getElementById("message").value
-            };
+        const fname = document.getElementById("fname");
+        const lname = document.getElementById("lname");
+        const phone = document.getElementById("phone");
+        const email = document.getElementById("email");
+        const message = document.getElementById("message");
 
-            fetch("https://script.google.com/macros/s/AKfycbwdS3q66_1L-zJ3aSFyv-JWgb1HhCTDVu-PBYw3KlxGQuWisgk0NMZtjs_h4a80bxU4/exec", {
-                method: "POST",
-                mode: "no-cors",   // ⭐ IMPORTANT
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(data)
-            });
+        // Check if any field is empty
+        if (
+            fname.value.trim() === "" ||
+            lname.value.trim() === "" ||
+            phone.value.trim() === "" ||
+            email.value.trim() === "" ||
+            message.value.trim() === ""
+        ) {
+            alert("⚠️ Please fill all fields before submitting.");
+            return; // stop submission
+        }
 
-            alert("Message sent successfully!");
-            document.getElementById("contactForm").reset();
+        const data = {
+            fname: fname.value.trim(),
+            lname: lname.value.trim(),
+            phone: phone.value.trim(),
+            email: email.value.trim(),
+            message: message.value.trim()
+        };
+
+        fetch("https://script.google.com/macros/s/AKfycbwdS3q66_1L-zJ3aSFyv-JWgb1HhCTDVu-PBYw3KlxGQuWisgk0NMZtjs_h4a80bxU4/exec", {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
         });
+
+        alert("✅ Message sent successfully!");
+        document.getElementById("contactForm").reset();
+    });
     </script>
+
 
 
 
@@ -1099,7 +1118,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="row">
                     <div class="col-md-12">
                         <div class="footer-copyright-text">
-                            <p>© 2025 Nalaemton Infotech Private Limited. All Rights Reserved.</p>
+                            <p>© 2026 Nalaemton Infotech Private Limited. All Rights Reserved.</p>
                         </div>
                     </div>
                 </div>
@@ -1143,5 +1162,4 @@ document.addEventListener("DOMContentLoaded", () => {
 	<script src="../../demo.awaikenthemes.com/assets/js/theme-panel.js"></script>
 </body>
 
-<!-- Mirrored from html.awaikenthemes.com/proshield/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 25 Dec 2025 13:51:19 GMT -->
 </html>
